@@ -3,16 +3,30 @@
 {% block pageTitle %}Nos derniers articles{% endblock %}
 
 {% block body %}
-  {% for books in book %}
-  <div class="card my-5">
-    <h5 class="card-header">{{ books.name }}</h5>
-    <div class="card-body">
-      <h5 class="card-title">Auteur : {{ books.autor }}</h5>
-      <p>Publié le : {{ books.date|date("d/m/Y") }}</p>
-      <p>Publié le : {{ books.status }}</p>
-      <p class="card-text">{{ books.resume }} ...</p>
-
+  <div class="container">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          {% for books in book %}
+            <div class="col-sm-12 col-md-4 col-lg-3 my-3">
+              <div class="card mb">
+                <img class="card-img-top" src="https://www.image.ie/images/no-image.png" alt="Card image cap">
+                <div class="card-body mb">
+                  <h5 class="card-title">{{ books.name }}</h5>
+                  <p class="card-text">{{ books.extrait }} ...</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Auteur: {{ books.autor }}</li>
+                    <li class="list-group-item">Publié le: {{ books.date|date("d/m/Y") }}</li>
+                  </ul>
+                  <div class="card-body">
+                    <a href="single/{{ books.id }}" class="card-link">Card link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
-  {% endfor %}
 {% endblock %}
