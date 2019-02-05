@@ -37,7 +37,7 @@ class Book
     private $autor;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $resume;
 
