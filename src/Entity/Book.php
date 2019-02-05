@@ -82,6 +82,11 @@ class Book
         return $this;
     }
 
+    public function getExtrait(): ?string
+    {
+        return substr($this->resume,0,50);
+    }
+
     public function getResume(): ?string
     {
         return $this->resume;
