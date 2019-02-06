@@ -8,16 +8,6 @@ use App\Entity\Book;
 class BookController extends AbstractController
 {
     /**
-     * @Route("/book", name="book")
-    */
-    public function index()
-    {
-        return $this->render('book/index.html.twig', [
-            'controller_name' => 'BookController',
-        ]);
-    }
-
-    /**
      * @Route("/index", name="book_index")
      * @Route("/")
     */
