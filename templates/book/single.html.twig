@@ -15,8 +15,14 @@
                   <p class="card-text">{{ book.resume }}</p>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Auteur: {{ book.autor }}</li>
-                    <li class="list-group-item">Catégorie: {{ book.category }}</li>
+                    <li class="list-group-item">Catégorie: {{ book.category.categoryName }}</li>
                     <li class="list-group-item">Publié le: {{ book.date|date("d/m/Y") }}</li>
+                    <li class="list-group-item">Loué par:
+                    {% if book.user %}
+                      <td>{{ book.user.firstname }}</td>
+                    {% else %}
+                      <td>Personne</td>
+                    {% endif %}
                   </ul>
                 </div>
                 {% if book.status == 1 %}

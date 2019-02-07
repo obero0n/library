@@ -15,6 +15,7 @@
                 <th scope="col">Auteur</th>
                 <th scope="col">Catégorie</th>
                 <th scope="col">Date de sortie</th>
+                <th scope="col">Loué par</th>
                 <th scope="col">Voir le livre</th>
               </tr>
             </thead>
@@ -24,8 +25,13 @@
                   <td>{{ books.name }}</td>
                   <td>{{ books.extrait }}</td>
                   <td>{{ books.autor }}</td>
-                  <td>{{ books.category }}</td>
+                  <td>{{ books.category.categoryName }}</td>
                   <td>{{ books.date|date("d/m/Y") }}</td>
+                  {% if books.user %}
+                    <td>{{ books.user.firstname }}</td>
+                  {% else %}
+                    <td>Personne</td>
+                  {% endif %}
                   <td><a href="single/{{ books.id }}" class="card-link">Cliquez ici</a></td>
                 </tr>
               {% endfor %}
