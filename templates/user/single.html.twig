@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block pageTitle %}Utilisateur{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+            <div class="col-12  my-3">
+              <div class="card mb">
+                <div class="card-body mb">
+                  <h5 class="card-title">Prénom: {{ user.firstname }}</h5>
+                  <p class="card-text">Nom: {{ user.lastname }}</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Code: {{ user.code }}</li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
