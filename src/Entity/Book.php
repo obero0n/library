@@ -41,6 +41,7 @@ class Book
      */
     private $date;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,4 +111,5 @@ class Book
 
         return $this;
     }
+
 }
