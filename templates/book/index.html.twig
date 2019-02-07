@@ -7,25 +7,30 @@
     <div class="row">
       <div class="container">
         <div class="row">
-          {% for books in book %}
-            <div class="col-sm-12 col-md-4 col-lg-3 my-3">
-              <div class="card mb">
-                <img class="card-img-top" src="https://www.image.ie/images/no-image.png" alt="Card image cap">
-                <div class="card-body mb">
-                  <h5 class="card-title">{{ books.name }}</h5>
-                  <p class="card-text">{{ books.extrait }} ...</p>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Auteur: {{ books.autor }}</li>
-                    <li class="list-group-item">Category: {{ books.category }}</li>
-                    <li class="list-group-item">Publié le: {{ books.date|date("d/m/Y") }}</li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="single/{{ books.id }}" class="card-link">Card link</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Extrait</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Date de sortie</th>
+                <th scope="col">Voir le livre</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for books in book %}
+                <tr>
+                  <td>{{ books.name }}</td>
+                  <td>{{ books.extrait }}</td>
+                  <td>{{ books.autor }}</td>
+                  <td>{{ books.category }}</td>
+                  <td>{{ books.date|date("d/m/Y") }}</td>
+                  <td><a href="single/{{ books.id }}" class="card-link">Cliquez ici</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
