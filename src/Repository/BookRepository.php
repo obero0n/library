@@ -19,14 +19,14 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function getBookWithCategory(){
-      return $this->createQueryBuilder('b')
-          ->addSelect('c')
-          ->leftJoin('b.category' ,'c')
-          ->getQuery()
-          ->getResult()
-      ;
-    }
+    // public function getBookWithCategory(){
+    //   return $this->createQueryBuilder('b')
+    //       ->addSelect('c')
+    //       ->leftJoin('b.category' ,'c')
+    //       ->getQuery()
+    //       ->getResult()
+    //   ;
+    // }
 
     public function getOneBookWithCategory($id)
     {
@@ -39,6 +39,18 @@ class BookRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+
+    public function getBookWithCategory(){
+      return $this->createQueryBuilder('b')
+          ->addSelect('c')
+          ->leftJoin('b.category' ,'c')
+          ->addSelect('u')
+          ->leftJoin('b.user', 'u')
+          ->getQuery()
+          ->getResult()
+      ;
     }
 
     // /**
