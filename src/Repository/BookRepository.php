@@ -28,6 +28,18 @@ class BookRepository extends ServiceEntityRepository
       ;
     }
 
+    public function getOneBookWithCategory($id)
+    {
+        return $this->createQueryBuilder('b')
+            // p.category refers to the "category" property on product
+            ->leftJoin('b.category' ,'c')
+            // selects all the category data to avoid the query
+            ->addSelect('c')
+            ->andWhere('b.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
     // /**
     //  * @return Book[] Returns an array of Book objects

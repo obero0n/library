@@ -14,15 +14,10 @@ class BookController extends AbstractController
     */
     public function home()
     {
-        // $repository = $this->getDoctrine()->getRepository(Book::class);
-        // $books = $repository->findAll();
-
         $repository = $this->getDoctrine()
               ->getRepository(Book::class)
               ->getBookWithCategory();
         $books = $repository;
-
-          var_dump($books);
         return $this->render("book/index.html.twig", ["book" => $books]);
     }
 
@@ -32,8 +27,10 @@ class BookController extends AbstractController
     */
     public function single($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Book::class);
-        $book = $repository->find($id);
+        $repository = $this->getDoctrine()
+              ->getRepository(Book::class)
+              ->getOneBookWithCategory($id);
+        $book = $repository;
 
         return $this->render('book/single.html.twig',["book" => $book]);
         return new Response();
