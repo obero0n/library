@@ -41,6 +41,11 @@ class Book
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $categoryId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Book
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(int $categoryId): self
+    {
+        $this->categoryId = $categoryId;
 
         return $this;
     }
