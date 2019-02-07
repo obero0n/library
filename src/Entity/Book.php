@@ -41,10 +41,6 @@ class Book
      */
     private $date;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $categoryId;
 
     public function getId(): ?int
     {
@@ -116,6 +112,7 @@ class Book
         return $this;
     }
 
+<<<<<<< HEAD
     public function getCategoryId(): ?int
     {
         return $this->categoryId;
@@ -127,4 +124,6 @@ class Book
 
         return $this;
     }
+=======
+>>>>>>> b5dc8cc5f0f7704ce70ee554f85b429927dd972f
 }
