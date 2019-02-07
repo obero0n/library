@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Book;
+use App\Repository\BookRepository;
 class BookController extends AbstractController
 {
     /**
@@ -13,9 +14,15 @@ class BookController extends AbstractController
     */
     public function home()
     {
-        $repository = $this->getDoctrine()->getRepository(Book::class);
-        $books = $repository->findAll();
-        
+        // $repository = $this->getDoctrine()->getRepository(Book::class);
+        // $books = $repository->findAll();
+
+        $repository = $this->getDoctrine()
+              ->getRepository(Book::class)
+              ->getBookWithCategory();
+        $books = $repository;
+
+          var_dump($books);
         return $this->render("book/index.html.twig", ["book" => $books]);
     }
 
