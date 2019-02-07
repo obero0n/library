@@ -112,18 +112,4 @@ class Book
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getCategoryId(): ?int
-    {
-        return $this->categoryId;
-    }
-
-    public function setCategoryId(int $categoryId): self
-    {
-        $this->categoryId = $categoryId;
-
-        return $this;
-    }
-=======
->>>>>>> b5dc8cc5f0f7704ce70ee554f85b429927dd972f
 }
