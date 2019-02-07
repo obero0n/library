@@ -28,7 +28,7 @@
                   <td>{{ books.category.categoryName }}</td>
                   <td>{{ books.date|date("d/m/Y") }}</td>
                   {% if books.user %}
-                    <td>{{ books.user.firstname }}</td>
+                    <td>{{ books.user.firstname }} {{ books.user.lastname }}</td>
                   {% else %}
                     <td>Personne</td>
                   {% endif %}
