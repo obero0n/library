@@ -55,16 +55,13 @@ class BookController extends AbstractController
            $entityManager->persist($book);
            $entityManager->flush();
 
-           return $this->redirectToRoute('single');
+           return $this->redirectToRoute('book_index');
        }
 
        return $this->render('book/addbook.html.twig', [
            'book' => $book,
            'form' => $form->createView(),
-           'choice_value' => function (MyBookEntity $book = null)
-           {
-               return $book ? $entity->getCategoryName() : '';
-           }
+
        ]);
    }
 }
