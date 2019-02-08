@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
 
-{% block pageTitle %}Listes des utilisateurs{% endblock %}
+{% block pageTitle %}
+  Listes des utilisateurs
+{% endblock %}
 
 {% block body %}
   <div class="container">
@@ -9,23 +11,23 @@
         <div class="row">
             <table class="table">
                 <thead>
-                    <tr>
+                  <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Code</th>
                     <th scope="col">Profil</th>
-                    </tr>
+                  </tr>
                 </thead>
                 <tbody>
                 {% for users in user %}
-                    <tr>
+                  <tr>
                     <th scope="row">{{ users.id }}</th>
                     <td>{{ users.firstname }}</td>
                     <td>{{ users.lastname }}</td>
                     <td>{{ users.code }}</td>
                     <td><a href="user/{{ users.id }}" class="card-link">Cliquez ici</a></td>
-                    </tr>
+                  </tr>
                 {% endfor %}
                 </tbody>
             </table>
