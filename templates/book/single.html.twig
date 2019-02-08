@@ -19,7 +19,7 @@
                     <li class="list-group-item">Publié le: {{ book.date|date("d/m/Y") }}</li>
                     <li class="list-group-item">Loué par:
                     {% if book.user %}
-                      <td>{{ book.user.firstname }}</td>
+                      <td>{{ book.user.firstname }} {{ book.user.lastname }}</td>
                     {% else %}
                       <td>Personne</td>
                     {% endif %}
