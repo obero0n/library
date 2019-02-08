@@ -7,22 +7,37 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 use App\Form\BookType;
+use App\Form\SortByType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends AbstractController
 {
     /**
-     * @Route("/index", name="book_index")
+     * @Route("/index", name="book_index", methods={"GET","POST"})
      * @Route("/")
     */
-    public function home()
+    public function home(BookRepository $bookRepository, Request $request): Response
     {
-        $repository = $this->getDoctrine()
-              ->getRepository(Book::class)
-              ->getBookWithCategory();
-        $books = $repository;
-        return $this->render("book/index.html.twig", ["book" => $books]);
+        // $repository = $this->getDoctrine()
+        //       ->getRepository(Book::class)
+        //       ->getBookWithCategory();
+        // $books = $repository;
+
+        $form = $this->createForm(SortByType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+          $categorySearch = $form->getData();
+          $books = $bookRepository->getBookWithCategory($categorySearch['categoryName']);
+        }
+        else {
+          $books = $bookRepository->findAll();
+        }
+        return $this->render('book/index.html.twig', [
+            'book' => $books,
+            'form' => $form->createView()
+]);
     }
 
     /**
