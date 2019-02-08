@@ -20,21 +20,29 @@ class BookType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'name'])
-            ->add('status', CheckboxType::class, ['label' => 'status'])
+            ->add('status', ChoiceType::class, ['choices' => ['En stock' => 1 , 'Indisponible' => 0]])
             ->add('autor', TextType::class, ['label' => 'autor'])
             ->add('resume', TextType::class, ['label' => 'resume'])
             ->add('date', DateType::class, ['label' => 'date'])
-            ->add('category', EntityType::class, [
+            ->add('category', EntityType::class, 
+            [
                 'class' => Category::class,
                 'choice_label' => 'categoryName',
-              ])
-            ->add('Envoyer', SubmitType::class, ['attr' => ['label' => 'Envoyer']])
+            ])
+            ->add('Envoyer', SubmitType::class, 
+            [
+                'attr' => 
+                [
+                    'label' => 'Envoyer'
+                ]
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+        [
             'data_class' => Book::class,
         ]);
     }
