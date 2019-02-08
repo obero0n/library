@@ -19,10 +19,6 @@ class BookController extends AbstractController
     */
     public function home(BookRepository $bookRepository, Request $request): Response
     {
-        // $repository = $this->getDoctrine()
-        //       ->getRepository(Book::class)
-        //       ->getBookWithCategory();
-        // $books = $repository;
 
         $form = $this->createForm(SortByType::class);
         $form->handleRequest($request);
