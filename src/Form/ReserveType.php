@@ -3,22 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchType extends AbstractType
+class ReserveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('status')
-            ->add('autor')
-            ->add('resume')
-            ->add('date')
-            ->add('category')
-            ->add('user')
+        ->add('user', EntityType::class,[
+            'class' => Book::class,
+            'choice_label' => 'userid',
+            'choice_value' => 'id'
+          ])
         ;
     }
 
