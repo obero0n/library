@@ -21,7 +21,7 @@ class BookController extends AbstractController
     {
         // $repository = $this->getDoctrine()
         //       ->getRepository(Book::class)
-        //       ->getBookWithCategory();
+        //       ->getBoobook_singlekWithCategory();
         // $books = $repository;
         $form = $this->createForm(SortByType::class);
         $form->handleRequest($request);

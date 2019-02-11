@@ -19,7 +19,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * Matches @Route("/user/{id}", requirements={"id"="\d+"}) exactly
      * @Route("/user/{id}", requirements={"id"="\d+"}, name="user_single")
     */
     public function user($id)
