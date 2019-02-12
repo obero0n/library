@@ -26,6 +26,18 @@ class Library
      */
     private $city;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $User;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +63,30 @@ class Library
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->Book;
+    }
+
+    public function setBook(?Book $Book): self
+    {
+        $this->Book = $Book;
 
         return $this;
     }
