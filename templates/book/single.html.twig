@@ -22,21 +22,15 @@
                     <li class="list-group-item">Loué par:
                     {% if book.user %}
                       <td>{{ book.user.firstname }} {{ book.user.lastname }}</td>
+                      <a href="{{ path("book_retour", {"id" : book.id})}}" class="btn btn-success">Retour livre</a>
                     {% else %}
                       <td>Personne</td>
+                      {{ form_start(form) }}
+                      {{ form_widget(form.code) }}
+                      {{ form_widget(form.Emprunter) }}
+                      {{ form_end(form) }}
                     {% endif %}
                   </ul>
-                </div>
-                {% if book.status == 1 %}
-                    {{ form_start(form) }}
-                    {{ form_widget(form.code) }}
-                    {{ form_widget(form.Emprunter) }}
-                {{ form_end(form) }}
-                {% else %}
-                    <a href="#" class="btn btn-danger disabled">Indisponible</a>
-                {% endif %}
-
-              </div>
             </div>
         </div>
       </div>

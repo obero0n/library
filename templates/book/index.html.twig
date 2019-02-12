@@ -33,7 +33,7 @@
                   <td>{{ books.category.categoryName }}</td>
                   <td>{{ books.date|date("d/m/Y") }}</td>
                   {% if books.user %}
-                    <td>{{ books.user.firstname }} {{ books.user.lastname }}</td>
+                    <td><a href="user/{{ books.user.id }}"> {{ books.user.firstname }} {{ books.user.lastname }}</a></td>
                   {% else %}
                     <td>Personne</td>
                   {% endif %}

@@ -42,7 +42,7 @@ class Book
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -143,9 +143,14 @@ class Book
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
+        if($user)
+        {
+            $this->setStatus(0);
+        }
+        else
+        {
+            $this->setStatus(1);
+        }
         return $this;
     }
-
-
 }
