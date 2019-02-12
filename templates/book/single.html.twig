@@ -28,10 +28,14 @@
                   </ul>
                 </div>
                 {% if book.status == 1 %}
-                    <a href="#" class="btn btn-success btn-lg active">Réserver</a>
+                    {{ form_start(form) }}
+                    {{ form_widget(form.code) }}
+                    {{ form_widget(form.Emprunter) }}
+                {{ form_end(form) }}
                 {% else %}
                     <a href="#" class="btn btn-danger disabled">Indisponible</a>
                 {% endif %}
+
               </div>
             </div>
         </div>

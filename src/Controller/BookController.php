@@ -8,6 +8,8 @@ use App\Entity\Book;
 use App\Repository\BookRepository;
 use App\Form\BookType;
 use App\Form\SortByType;
+use App\Form\BorrowType;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,14 +21,7 @@ class BookController extends AbstractController
     */
     public function home(BookRepository $bookRepository, Request $request): Response
     {
-<<<<<<< HEAD
 
-=======
-        // $repository = $this->getDoctrine()
-        //       ->getRepository(Book::class)
-        //       ->getBookWithCategory();
-        // $books = $repository;
->>>>>>> 52aa8912de3fbe06e5fba7631a1558c0a28a6c7b
         $form = $this->createForm(SortByType::class);
         $form->handleRequest($request);
 
@@ -35,13 +30,13 @@ class BookController extends AbstractController
             $categorySearch = $form->getData();
             $books = $bookRepository->getBookWithCategory($categorySearch['categoryName']);
         }
-        
+
         else
         {
             $books = $bookRepository->findAll();
         }
-        
-        return $this->render('book/index.html.twig', 
+
+        return $this->render('book/index.html.twig',
         [
             'book' => $books,
             'form' => $form->createView()
@@ -52,15 +47,34 @@ class BookController extends AbstractController
      * Matches @Route("/single/{id}", requirements={"id"="\d+"}) exactly
      * @Route("/single/{id}", requirements={"id"="\d+"}, name="single")
     */
-    public function single($id)
+    public function single($id, Request $request)
     {
-        $repository = $this->getDoctrine()
-            ->getRepository(Book::class)
-            ->getOneBookWithCategory($id);
-        $book = $repository;
+      $book = $this->getDoctrine()->getRepository(Book::class)->findBookAndUser($id);
+      if(!$book) {
+        throw $this->createNotFoundException("Ce livre n'existe pas");
+      }
+      $form = $this->createForm(BorrowType::class);
+      $form->handleRequest($request);
 
-        return $this->render('book/single.html.twig',["book" => $book]);
-        return new Response();
+      if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(["code" => $data["code"]]);
+        if(!$user) {
+          $this->addFlash("danger", "Ce code utilisateur n'est pas valide");
+        }
+        else {
+          $book->setUser($user);
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($book);
+          $entityManager->flush();
+          $this->addFlash("success", "Le livre a été emprunté");
+        }
+      }
+
+      return $this->render('book/single.html.twig', [
+          'book' => $book,
+          'form' => $form->createView()
+      ]);
     }
 
     /**
@@ -71,17 +85,17 @@ class BookController extends AbstractController
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('book_index');
         }
-        
-        return $this->render('book/addbook.html.twig', 
+
+        return $this->render('book/addbook.html.twig',
         [
             'book' => $book,
             'form' => $form->createView()

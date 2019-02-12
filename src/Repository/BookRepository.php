@@ -57,6 +57,19 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findBookAndUser(int $id): ?Book
+{
+  return $this->createQueryBuilder('b')
+    ->addSelect('u')
+    ->leftJoin('b.user', 'u')
+    ->addSelect('c')
+    ->leftJoin('b.category', 'c')
+    ->andWhere('b.id = :id')
+    ->setParameter('id', $id)
+    ->getQuery()
+    ->getOneOrNullResult();
+}
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */
