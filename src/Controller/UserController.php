@@ -8,7 +8,7 @@ use App\Entity\User;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/listuser", name="user")
+     * @Route("/listuser", name="user_index")
      */
     public function home()
     {
@@ -19,8 +19,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Matches @Route("/user/{id}", requirements={"id"="\d+"}) exactly
-     * @Route("/user/{id}", requirements={"id"="\d+"}, name="single")
+     * @Route("/user/{id}", requirements={"id"="\d+"}, name="user_single")
     */
     public function user($id)
     {

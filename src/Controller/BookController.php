@@ -45,7 +45,7 @@ class BookController extends AbstractController
 
     /**
      * Matches @Route("/single/{id}", requirements={"id"="\d+"}) exactly
-     * @Route("/single/{id}", requirements={"id"="\d+"}, name="single")
+     * @Route("/single/{id}", requirements={"id"="\d+"}, name="book_single")
     */
     public function single($id, Request $request)
     {
@@ -101,4 +101,4 @@ class BookController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-}
+
