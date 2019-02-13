@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,16 +29,16 @@ class Library
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="Library")
      */
-    private $User;
+    private $books;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Book")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Book;
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -67,27 +69,36 @@ class Library
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBooks(): Collection
     {
-        return $this->User;
+        return $this->books;
     }
 
-    public function setUser(?User $User): self
+    public function addBook(Book $book): self
     {
-        $this->User = $User;
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setLibrary($this);
+        }
 
         return $this;
     }
 
-    public function getBook(): ?Book
+    public function removeBook(Book $book): self
     {
-        return $this->Book;
-    }
-
-    public function setBook(?Book $Book): self
-    {
-        $this->Book = $Book;
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            // set the owning side to null (unless already changed)
+            if ($book->getLibrary() === $this) {
+                $book->setLibrary(null);
+            }
+        }
 
         return $this;
     }
+
+
 }
