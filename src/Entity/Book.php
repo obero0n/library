@@ -52,6 +52,12 @@ class Book
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Library", inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Library;
+
 
     public function getId(): ?int
     {
@@ -151,6 +157,18 @@ class Book
         {
             $this->setStatus(1);
         }
+        return $this;
+    }
+
+    public function getLibrary(): ?Library
+    {
+        return $this->Library;
+    }
+
+    public function setLibrary(?Library $Library): self
+    {
+        $this->Library = $Library;
+
         return $this;
     }
 }
