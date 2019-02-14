@@ -12,13 +12,19 @@ use App\Form\BorrowType;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+* Require ROLE_ADMIN for *every* controller method in this class.
+*
+* @IsGranted("ROLE_ADMIN")
+*/
 class BookController extends AbstractController
 {
 
   /**
-  * @Route("/index", name="book_index", methods={"GET","POST"})
-  * @Route("/")
+  * @Route("/listbook", name="book_index", methods={"GET","POST"})
+  * @Route("/listbook")
   */
 
   public function home(BookRepository $bookRepository, Request $request): Response

@@ -16,7 +16,7 @@ class LibraryFixtures extends Fixture
     {
         
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 10; $i++)
+        for ($i = 0; $i < 100; $i++)
         {
             $library = new Library('Library');
             $library->setName($faker->company());
