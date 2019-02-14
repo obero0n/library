@@ -21,7 +21,7 @@ class SortByType extends AbstractType
               'choice_label' => 'categoryName',
               'choice_value' => 'id'
             ])
-              ->add('submit', SubmitType::class,
+              ->add('Rechercher', SubmitType::class,
               ['attr' => ['label' => 'Rechercher']])
         ;
     }
