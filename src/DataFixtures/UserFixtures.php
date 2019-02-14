@@ -19,6 +19,7 @@ class UserFixtures extends Fixture
             $user->setFirstname($faker->name);
             $user->setLastname($faker->name);
             $user->setCode($faker->randomNumber($nbDigits = NULL, $strict = false));
+            $user->setLibrary($this->getReference('Library'));
             $manager->persist($user);
         }
         $manager->flush();
