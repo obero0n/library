@@ -13,7 +13,7 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 10; $i++)
+        for ($i = 0; $i < 100; $i++)
         {
             $category = new Category();
             $category->setCategoryName($faker->name);

@@ -2,9 +2,17 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+
+/**
+* Require ROLE_ADMIN for *every* controller method in this class.
+*
+* @IsGranted("ROLE_ADMIN")
+*/
+
 class UserController extends AbstractController
 {
     /**
