@@ -21,7 +21,7 @@
                     <li class="list-group-item">Publié le: {{ book.date|date("d/m/Y") }}</li>
                     <li class="list-group-item">Loué par:
                     {% if book.user %}
-                      <td>{{ book.user.firstname }} {{ book.user.lastname }}</td>
+                      <td><a href="/user/{{ book.user.id }}"> {{ book.user.firstname }} {{ book.user.lastname }}</a></td>
                       <a href="{{ path("book_retour", {"id" : book.id})}}" class="btn btn-success">Retour livre</a>
                     {% else %}
                       <td>Personne</td>
