@@ -38,6 +38,12 @@ class User
      */
     private $books;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Library")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $library;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
@@ -117,5 +123,17 @@ class User
 
     public function __toString() {
         return $this->firstname;
+    }
+
+    public function getLibrary(): ?Library
+    {
+        return $this->library;
+    }
+
+    public function setLibrary(?Library $library): self
+    {
+        $this->library = $library;
+
+        return $this;
     }
 }
