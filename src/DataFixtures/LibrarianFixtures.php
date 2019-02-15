@@ -32,6 +32,7 @@ class LibrarianFixtures extends Fixture
              $librarian,
              'test'
          ));
+        $librarian->setLibrary($this->getReference('Library'));
 
         $manager->persist($librarian);
 

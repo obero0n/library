@@ -33,6 +33,12 @@ class Librarian implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Library")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Library;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +110,17 @@ class Librarian implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLibrary(): ?Library
+    {
+        return $this->Library;
+    }
+
+    public function setLibrary(?Library $Library): self
+    {
+        $this->Library = $Library;
+
+        return $this;
     }
 }
