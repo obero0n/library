@@ -19,6 +19,21 @@ class LibrarianRepository extends ServiceEntityRepository
         parent::__construct($registry, Librarian::class);
     }
 
+    public function getLibrarianWithLibrary(Library $library)
+    {
+        return $this->createQueryBuilder('b')
+            ->addSelect('c')
+            ->leftJoin('b.category' ,'c')
+            ->addSelect('u')
+            ->leftJoin('b.user', 'u')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $category)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Librarian[] Returns an array of Librarian objects
     //  */
